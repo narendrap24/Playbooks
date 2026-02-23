@@ -1,0 +1,23 @@
+---
+- name: Billing Directory and File Test
+  hosts: all
+  become: yes
+  gather_facts: yes
+
+  tasks:
+
+    - name: Create billing test directory
+      ansible.builtin.file:
+        path: /tmp/billing_test_dir
+        state: directory
+        mode: '0755'
+
+    - name: Create test file with content
+      ansible.builtin.copy:
+        dest: /tmp/billing_test_dir/test_file.txt
+        content: |
+          Billing Test File
+          Hostname: {{ inventory_hostname }}
+          Date: {{ ansible_date_time.date }}
+          Time: {{ ansible_date_time.time }}
+        mode: '0644'
