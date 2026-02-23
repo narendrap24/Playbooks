@@ -1,0 +1,9 @@
+---
+- name: Billing Test Play
+  hosts: all
+  gather_facts: yes
+  tasks:
+    - name: Create temp file
+      ansible.builtin.file:
+        path: /tmp/billing_test_file
+        state: touch
